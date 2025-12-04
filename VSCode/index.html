@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Simple Smart Door Camera Dashboard</title>
+</head>
+<body>
+    <h1></h1>
+
+    <!-- Motion Detection -->
+    <h3>Motion Detection:</h3>
+    <p id="motionStatus">No Motion</p>
+    <button onclick="triggerMotion()">Simulate Motion</button> <!-- senses motion -->
+
+    <!-- Doorbell -->
+    <h3>Doorbell:<img src="doorbell.png" height="50" width="50"></src></h3>
+    <p id="doorbellStatus">Idle</p>
+    <button onclick="pressDoorbell()">Press Doorbell</button> <!-- When button pushed doorbell will ring-->
+
+    <!-- Device Status -->
+    <h3>Device Status:</h3>
+    <p id="deviceStatus">ON</p>
+    <button onclick="toggleDevice()">Toggle Device</button> <!-- When button clicked will toggle device on -->
+
+
+
+
+</body>
+</html>
