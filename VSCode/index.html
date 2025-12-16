@@ -1,30 +1,144 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Simple Smart Door Camera Dashboard</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Smart Door Camera Dashboard</title>
+
+<style>
+body {
+    background: linear-gradient(135deg, #ff711e, #f8fa87);
+    font-family: Arial, Helvetica, sans-serif;
+    margin: 0;
+    padding: 0;
+    color: #002244;
+}
+
+.container {
+    max-width: 700px;
+    margin: auto;
+    padding: 30px;
+    text-align: center;
+}
+
+h1 {
+    font-size: 42px;
+    margin-bottom: 10px;
+}
+
+.card {
+    background: white;
+    border-radius: 15px;
+    padding: 25px;
+    margin: 20px 0;
+    box-shadow: 0 6px 12px rgba(0,0,0,0.2);
+}
+
+.card h3 {
+    font-size: 28px;
+    margin-bottom: 15px;
+}
+
+.status {
+    font-size: 26px;
+    font-weight: bold;
+    margin: 10px 0;
+}
+
+button {
+    font-size: 22px;
+    padding: 12px 25px;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    background-color: #ff1e1e;
+    color: white;
+}
+
+button:hover {
+    background-color: #d70b0b;
+}
+
+.sensor-row {
+    display: flex;
+    justify-content: space-around;
+    font-size: 26px;
+}
+
+.sensor-box {
+    background: #f0f8ff;
+    padding: 20px;
+    border-radius: 12px;
+    width: 45%;
+}
+</style>
 </head>
+
 <body>
-    <h1></h1>
+
+<div class="container">
+    <h1>Smart Door Camera</h1>
+    <p style="font-size:22px;">Live Home Security Dashboard</p>
 
     <!-- Motion Detection -->
-    <h3>Motion Detection:</h3>
-    <p id="motionStatus">No Motion</p>
-    <button onclick="triggerMotion()">Simulate Motion</button> <!-- senses motion -->
+    <div class="card">
+        <h3>🚶 Motion Detection</h3>
+        <p id="motionStatus" class="status">No Motion</p>
+        <button onclick="triggerMotion()">Simulate Motion</button>
+    </div>
 
     <!-- Doorbell -->
-    <h3>Doorbell:<img src="doorbell.png" height="50" width="50"></src></h3>
-    <p id="doorbellStatus">Idle</p>
-    <button onclick="pressDoorbell()">Press Doorbell</button> <!-- When button pushed doorbell will ring-->
+    <div class="card">
+        <h3>🔔 Doorbell</h3>
+        <p id="doorbellStatus" class="status">Idle</p>
+        <button onclick="pressDoorbell()">Press Doorbell</button>
+    </div>
+
+    <!-- Temperature & Humidity -->
+    <div class="card">
+        <h3>🌡 Environment</h3>
+        <div class="sensor-row">
+            <div class="sensor-box">
+                <p>Temperature</p>
+                <p class="status"><span id="temp">--</span> °C</p>
+            </div>
+            <div class="sensor-box">
+                <p>Humidity</p>
+                <p class="status"><span id="hum">--</span> %</p>
+            </div>
+        </div>
+    </div>
 
     <!-- Device Status -->
-    <h3>Device Status:</h3>
-    <p id="deviceStatus">ON</p>
-    <button onclick="toggleDevice()">Toggle Device</button> <!-- When button clicked will toggle device on -->
+    <div class="card">
+        <h3>⚙ Device Status</h3>
+        <p id="deviceStatus" class="status">ON</p>
+        <button onclick="toggleDevice()">Toggle Device</button>
+    </div>
+</div>
 
+<script>
+// --- Demo Functions (replace with ESP32 fetch later) ---
+function triggerMotion() {
+    document.getElementById("motionStatus").innerText = "Motion Detected";
+}
 
+function pressDoorbell() {
+    document.getElementById("doorbellStatus").innerText = "Ringing 🔔";
+}
 
+function toggleDevice() {
+    let status = document.getElementById("deviceStatus");
+    status.innerText = (status.innerText === "ON") ? "OFF" : "ON";
+}
+
+// --- Example live sensor update (ESP32 ready) ---
+setInterval(() => {
+    // Replace with: fetch("/data") for ESP32
+    document.getElementById("temp").innerText = (20 + Math.random() * 5).toFixed(1);
+    document.getElementById("hum").innerText = (40 + Math.random() * 10).toFixed(1);
+}, 2000);
+</script>
 
 </body>
 </html>
